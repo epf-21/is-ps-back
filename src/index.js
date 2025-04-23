@@ -1,5 +1,3 @@
-
-
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -22,8 +20,4 @@ app.use('/api/search', searchRouter)
 app.use('/api/users', userRouter)
 
 
-const PORT = process.env.PORT || 4000
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
-})
+module.exports = app;
