@@ -50,15 +50,10 @@ class CarModel {
             }
           }
         },
-        orderBy: {
-          reservas: {
-            _count: 'desc'
-          }
-        },
         take: 15
       })
 
-      return cars.map(car => ({
+      const carsMostRented = cars.map(car => ({
         marca: car.marca,
         modelo: car.modelo,
         anio: car.año,
@@ -66,6 +61,8 @@ class CarModel {
         imagenes: car.imagenes?.[0]?.data ? Buffer.from(car.imagenes[0].data).toString('utf-8') : null,
         veces_alquilado: car._count.reservas,
       }))
+
+      return carsMostRented.sort((a, b) => b.veces_alquilado - a.veces_alquilado)
     } catch (error) {
       console.error('Error al obtener los autos más alquilados: ', error);
       throw new Error('Error al obtener los autos más alquilados');
