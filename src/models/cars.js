@@ -159,6 +159,36 @@ class CarModel {
       throw new Error('Error al obtener autos disponibles')
     }
   }
+
+  static async createCar({ anio, marca, modelo, precio, latitud, longitud }) {
+    try {
+      const newCars = await prisma.carro.create({
+        data: {
+          vim: "zxcv",
+          año: anio,
+          marca: marca,
+          modelo: modelo,
+          placa: "wert",
+          id_direccion: 1,
+          asientos: 8,
+          puertas: 6,
+          soat: true,
+          precio_por_dia: precio,
+          num_mantenimientos: 123,
+          transmicion: "dfdg",
+          estado: "Disponible",
+          id_usuario_rol: 1,
+          latitud: latitud,
+          longitud: longitud
+        }
+      })
+      return newCars
+    } catch (error) {
+      console.error('Error al crear un carro: ', error)
+      throw new Error('Error al crear coches')
+    }
+
+  }
 }
 
 module.exports = { CarModel }

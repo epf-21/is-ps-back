@@ -52,6 +52,21 @@ class CarController {
       }
     }
   }
+
+  static async createCar(req, res) {
+    try {
+      const { anio, marca, modelo, precio, latitud, longitud } = req.body
+      const newCars = await CarModel.createCar({ anio, marca, modelo, precio, latitud, longitud });
+      res.status(201).json(newCars)
+    } catch (error) {
+      console.error(error)
+      if (error instanceof Error) {
+        res.status(400).json({ error: error.message })
+      } else {
+        res.status(500).json({ error: 'Error interno del servidor' })
+      }
+    }
+  }
 }
 
 module.exports = { CarController }
