@@ -55,8 +55,8 @@ class CarController {
 
   static async createCar(req, res) {
     try {
-      const { anio, marca, modelo, precio, latitud, longitud } = req.body
-      const newCars = await CarModel.createCar({ anio, marca, modelo, precio, latitud, longitud });
+      const { anio, marca, modelo, precio, disponible_desde, disponible_hasta, latitud, longitud } = req.body
+      const newCars = await CarModel.createCar({ anio, marca, modelo, precio, disponible_desde, disponible_hasta, latitud, longitud });
       res.status(201).json(newCars)
     } catch (error) {
       console.error(error)

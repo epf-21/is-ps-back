@@ -160,7 +160,7 @@ class CarModel {
     }
   }
 
-  static async createCar({ anio, marca, modelo, precio, latitud, longitud }) {
+  static async createCar({ anio, marca, modelo, precio, disponible_desde, disponible_hasta, latitud, longitud }) {
     try {
       const newCars = await prisma.carro.create({
         data: {
@@ -178,6 +178,8 @@ class CarModel {
           transmicion: "dfdg",
           estado: "Disponible",
           id_usuario_rol: 1,
+          disponible_desde: disponible_desde,
+          disponible_hasta: disponible_hasta,
           latitud: latitud,
           longitud: longitud
         }
