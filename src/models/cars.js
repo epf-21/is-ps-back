@@ -139,24 +139,20 @@ class CarModel {
           modelo: true,
           año: true,
           precio_por_dia: true,
-          direccion: {
-            select: {
-              latitud: true,
-              longitud: true,
-            }
-          }
+          latitud: true,
+          longitud: true
         }
       })
       return carsAvailable
-        .filter(car => car.direccion?.latitud !== null && car.direccion?.longitud !== null)
+        .filter(car => car.latitud !== null && car.longitud !== null)
         .map(car => ({
           id: car.id,
           marca: car.marca,
           modelo: car.modelo,
           anio: car.año,
           precio: car.precio_por_dia,
-          latitud: car.direccion.latitud,
-          longitud: car.direccion.longitud
+          latitud: car.latitud,
+          longitud: car.longitud
         }))
     } catch (error) {
       console.error('Error al obtener autos disponibles: ', error)

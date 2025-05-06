@@ -99,6 +99,8 @@ model Carro {
   estado                          String
   id_usuario_rol                  Int
   descripcion                     String?
+  latitud                         Float?
+  longitud                        Float?
   ingresoTotal                    Float?                            @default(0)
   NumeroViajes                    Int?                              @default(0)
   usuario                         Usuario?                          @relation("CarrosPorUsuario", fields: [id_usuario_rol], references: [id])
