@@ -23,4 +23,7 @@ app.use('/api/search', searchRouter)
 app.use('/api/users', userRouter)
 app.use('/login', loginRoutes);
 
-module.exports = app;
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
