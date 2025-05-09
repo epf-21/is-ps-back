@@ -85,6 +85,27 @@ class ReservationModel {
     })
     return deleted
   }
+  static async cancelExpiredReservations() {
+    const now = new Date();
+  
+    const expiredReservations = await prisma.reserva.findMany({
+      where: {
+        estado: 'pendiente',
+        fecha_expiracion: {
+          lt: now,
+        },
+      },
+    });
+  
+    for (const reservation of expiredReservations) {
+      await prisma.reserva.update({
+        where: { id: reservation.id },
+        data: { estado: 'cancelado' },
+      });
+    }
+  
+    return expiredReservations.length;
+  }
 }
 
 module.exports = { ReservationModel }
