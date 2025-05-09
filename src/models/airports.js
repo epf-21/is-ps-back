@@ -24,8 +24,7 @@ class AirportModel {
         nombre: airport.nombre,
         latitud: airport.latitud,
         longitud: airport.longitud,
-        ciudad: airport.ciudad,       
-        id_ciudad: airport.id_ciudad        
+        ciudad: airport.ciudad
       }))
     } catch (error) {
       console.error('Error al obtener aeropuertos: ', error)
