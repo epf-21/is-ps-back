@@ -147,7 +147,12 @@ class CarModel {
           año: true,
           precio_por_dia: true,
           latitud: true,
-          longitud: true
+          longitud: true,
+          imagenes: {
+            select: {
+              data: true,
+            }
+          }
         }
       })
       return carsAvailable
@@ -159,7 +164,8 @@ class CarModel {
           anio: car.año,
           precio: car.precio_por_dia,
           latitud: car.latitud,
-          longitud: car.longitud
+          longitud: car.longitud,
+          image: car.imagenes?.[0]?.data || "",
         }))
     } catch (error) {
       console.error('Error al obtener autos disponibles: ', error)
