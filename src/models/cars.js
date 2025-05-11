@@ -202,7 +202,22 @@ class CarModel {
       console.error('Error al crear un carro: ', error)
       throw new Error('Error al crear coches')
     }
+  }
 
+  static async updatePriceCar({ id, price }) {
+    try {
+      const updatePrice = await prisma.carro.update({
+        where: { id: id },
+        data: {
+          precio_por_dia: price
+        }
+      })
+
+      return updatePrice;
+    } catch (error) {
+      console.error('Error al obtener autos:', error);
+      throw new Error('Error al actualizar el precio');
+    }
   }
 }
 
