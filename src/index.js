@@ -29,7 +29,4 @@ app.use('/detailCar', detailCarModule.controller);
 app.use('/searchCar', searchCarModule.controller);
 
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+module.exports = app;
