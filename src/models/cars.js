@@ -15,12 +15,19 @@ class CarModel {
       })
 
       return cars.map(car => ({
+        id: car.id,
         marca: car.marca,
         modelo: car.modelo,
         anio: car.año,
         precio_por_dia: car.precio_por_dia,
         imagenes: car.imagenes?.[0]?.data ? Buffer.from(car.imagenes[0].data).toString('utf-8') : null,
         veces_alquilado: car.reservas.length,
+        latitud: car.latitud,
+        longitud: car.longitud,
+        puertas: car.puertas,
+        asientos: car.asientos,
+        calificacion: car.calificacion,
+        transmision: car.transmicion
       }))
     } catch (error) {
       console.error('Error al obtener autos: ', error)
