@@ -161,11 +161,11 @@ class CarModel {
           id: car.id,
           marca: car.marca,
           modelo: car.modelo,
+          image: car.imagenes?.[0]?.data || "",
           anio: car.año,
           precio: car.precio_por_dia,
           latitud: car.latitud,
           longitud: car.longitud,
-          image: car.imagenes?.[0]?.data || "",
         }))
     } catch (error) {
       console.error('Error al obtener autos disponibles: ', error)
