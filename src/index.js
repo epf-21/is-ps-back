@@ -28,5 +28,4 @@ app.use('/login', loginRoutes);
 app.use('/detailCar', detailCarModule.controller);
 app.use('/searchCar', searchCarModule.controller);
 
-
 module.exports = app;

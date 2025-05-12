@@ -67,6 +67,24 @@ class CarController {
       }
     }
   }
+
+  static async updatePriceCar(req, res) {
+    try {
+      const { id } = req.params
+
+      const { price } = req.body
+
+      const updatePrice = await CarModel.updatePriceCar({ id: Number(id), price: price })
+      res.status(200).json(updatePrice)
+    } catch (error) {
+      console.error(error)
+      if (error instanceof Error) {
+        res.status(400).json({ error: error.message })
+      } else {
+        res.status(500).json({ error: 'Error interno del servidor' })
+      }
+    }
+  }
 }
 
 module.exports = { CarController }
