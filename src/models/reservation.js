@@ -32,12 +32,12 @@ class ReservationModel {
       const now = new Date()
       const daysUntilReservation = (new Date(starDate) - now) / (1000 * 60 * 60 * 24)
 
-      if (daysUntilReservation < 3) {
+      if (daysUntilReservation < 2) {
         throw new Error('No se puede hacer la reserva al 0% para fechas tan cercanas')
       }
 
       expirationDate = new Date()
-      expirationDate.setDate(expirationDate.getDate() + 2)
+      expirationDate.setHours(expirationDate.getHours() + 12)
     }
 
     const newReservation = await prisma.reserva.create({
@@ -84,6 +84,27 @@ class ReservationModel {
       where: { id: id }
     })
     return deleted
+  }
+  static async cancelExpiredReservations() {
+    const now = new Date();
+  
+    const expiredReservations = await prisma.reserva.findMany({
+      where: {
+        estado: 'pendiente',
+        fecha_expiracion: {
+          lt: now,
+        },
+      },
+    });
+  
+    for (const reservation of expiredReservations) {
+      await prisma.reserva.update({
+        where: { id: reservation.id },
+        data: { estado: 'cancelado' },
+      });
+    }
+  
+    return expiredReservations.length;
   }
 }
 

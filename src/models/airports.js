@@ -3,13 +3,28 @@ const { prisma } = require("../config/prisma");
 class AirportModel {
   static async getAll() {
     try {
-      const airports = await prisma.aeropuerto.findMany()
+      const airports = await prisma.aeropuerto.findMany({
+         select: {
+          id: true,
+          nombre:true,
+          latitud: true,
+          longitud: true,          
+          ciudad: {
+            select: {
+              nombre: true
+            }          
+          }
+          },  
+          orderBy: {
+          nombre: 'asc'
+          }
+      })
 
       return airports.map(airport => ({
         nombre: airport.nombre,
         latitud: airport.latitud,
         longitud: airport.longitud,
-        id_ciudad: airport.id_ciudad
+        ciudad: airport.ciudad
       }))
     } catch (error) {
       console.error('Error al obtener aeropuertos: ', error)
