@@ -7,10 +7,13 @@ const findAll = async () => {
         id: true,
         modelo: true,
         marca: true,
+        año: true,
         asientos: true,
         puertas: true,
         transmicion: true,
         precio_por_dia: true,
+        latitud: true,
+        longitud: true,
         combustiblesporCarro: {
           select: {
             combustible: {
@@ -45,8 +48,13 @@ const findAll = async () => {
             data: true,
           }
         },
-        disponible_desde: true,
-        disponible_hasta: true,
+        reservas: {
+          select: {
+            fecha_inicio: true,
+            fecha_fin: true,
+            estado: true,
+          }
+        }
       }
     });
   } catch (error) {
